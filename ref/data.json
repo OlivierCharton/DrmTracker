@@ -1,0 +1,272 @@
+{
+  "Maps": [
+    {
+      "Id": 1,
+      "Name": "Metrica Province",
+      "NameFrenchLocale": "Province de Metrica",
+      "ShortName": "Metrica"
+    },
+    {
+      "Id": 2,
+      "Name": "Brisban Wildlands",
+      "NameFrenchLocale": "Terres sauvages de Brisban",
+      "ShortName": "Brisban"
+    },
+    {
+      "Id": 3,
+      "Name": "Gendarran Fields",
+      "NameFrenchLocale": "Champs de Gendarran",
+      "ShortName": "Gendarran"
+    },
+    {
+      "Id": 4,
+      "Name": "Fields of Ruin",
+      "NameFrenchLocale": "Champs de ruine",
+      "ShortName": "Ruins"
+    },
+    {
+      "Id": 5,
+      "Name": "Thunderhead Peaks",
+      "NameFrenchLocale": "Pics de Chef-Tonnerre",
+      "ShortName": "Thunderhead"
+    },
+    {
+      "Id": 6,
+      "Name": "Lake Doric",
+      "NameFrenchLocale": "Lac Doric",
+      "ShortName": "Doric"
+    },
+    {
+      "Id": 7,
+      "Name": "Snowden Drifts",
+      "NameFrenchLocale": "Congères d'Antreneige",
+      "ShortName": "Snowden"
+    },
+    {
+      "Id": 8,
+      "Name": "Caledon Forest",
+      "NameFrenchLocale": "Forêt de Caledon",
+      "ShortName": "Caledon"
+    },
+    {
+      "Id": 9,
+      "Name": "Bloodtide Coast",
+      "NameFrenchLocale": "Côte de la marée sanglante",
+      "ShortName": "Bloodtide"
+    },
+    {
+      "Id": 10,
+      "Name": "Fireheart Rise",
+      "NameFrenchLocale": "Montée de Flambecœur",
+      "ShortName": "Fireheart"
+    }
+  ],
+  "Factions": [
+    {
+      "Id": 1,
+      "Name": "Crystal Bloom",
+      "NameFrenchLocale": "Fleur de cristal",
+      "ShortName": "Crystal"
+    },
+    {
+      "Id": 2,
+      "Name": "Ebon Vanguard",
+      "NameFrenchLocale": "Avant-garde d'Ebon",
+      "ShortName": "Ebon"
+    },
+    {
+      "Id": 3,
+      "Name": "Deldrimor Dwarves",
+      "NameFrenchLocale": "Nains de Deldrimor",
+      "ShortName": "Deldrimor"
+    },
+    {
+      "Id": 4,
+      "Name": "Exalted",
+      "NameFrenchLocale": "Exaltés",
+      "ShortName": "Exalted"
+    },
+    {
+      "Id": 5,
+      "Name": "Tengu",
+      "NameFrenchLocale": "Tengus",
+      "ShortName": "Tengu"
+    },
+    {
+      "Id": 6,
+      "Name": "Kodan",
+      "NameFrenchLocale": "Kodans",
+      "ShortName": "Kodan"
+    },
+    {
+      "Id": 7,
+      "Name": "Skritt",
+      "NameFrenchLocale": "Skritts",
+      "ShortName": "Skritt"
+    },
+    {
+      "Id": 8,
+      "Name": "Olmakhan",
+      "NameFrenchLocale": "Olmakhans",
+      "ShortName": "Olmakhan"
+    },
+    {
+      "Id": 9,
+      "Name": "Flame Legion",
+      "NameFrenchLocale": "Légion de la Flamme",
+      "ShortName": "Legion"
+    }
+  ],
+  "Drms": [
+    {
+      "Map": 1,
+      "ApiIds": {
+        "Clear": 5534,
+        "FullCM": 5511,
+        "Factions": 5709
+      },
+      "FactionsIds": [
+        1,
+        3,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "Map": 2,
+      "ApiIds": {
+        "Clear": 5490,
+        "FullCM": 5475,
+        "Factions": 5698
+      },
+      "FactionsIds": [
+        1,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "Map": 3,
+      "ApiIds": {
+        "Clear": 5510,
+        "FullCM": 5496,
+        "Factions": 5700
+      },
+      "FactionsIds": [
+        2,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "Map": 4,
+      "ApiIds": {
+        "Clear": 5581,
+        "FullCM": 5589,
+        "Factions": 5693
+      },
+      "FactionsIds": [
+        1,
+        2,
+        3,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "Map": 5,
+      "ApiIds": {
+        "Clear": 5579,
+        "FullCM": 5569,
+        "Factions": 5703
+      },
+      "FactionsIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8
+      ]
+    },
+    {
+      "Map": 6,
+      "ApiIds": {
+        "Clear": 5590,
+        "FullCM": 5555,
+        "Factions": 5697
+      },
+      "FactionsIds": [
+        1,
+        2,
+        4,
+        6,
+        7
+      ]
+    },
+    {
+      "Map": 7,
+      "ApiIds": {
+        "Clear": 5578,
+        "FullCM": 5593,
+        "Factions": 5708
+      },
+      "FactionsIds": [
+        1,
+        2,
+        3,
+        6,
+        9
+      ]
+    },
+    {
+      "Map": 8,
+      "ApiIds": {
+        "Clear": 5650,
+        "FullCM": 5644,
+        "Factions": 5691
+      },
+      "FactionsIds": [
+        4,
+        5,
+        7,
+        8
+      ]
+    },
+    {
+      "Map": 9,
+      "ApiIds": {
+        "Clear": 5642,
+        "FullCM": 5622,
+        "Factions": 5688
+      },
+      "FactionsIds": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "Map": 10,
+      "ApiIds": {
+        "Clear": 5640,
+        "FullCM": 5663,
+        "Factions": 5704
+      },
+      "FactionsIds": [
+        2,
+        3,
+        6,
+        9
+      ]
+    }
+  ]
+}
