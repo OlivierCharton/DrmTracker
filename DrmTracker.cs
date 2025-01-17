@@ -34,6 +34,10 @@ namespace DrmTracker
         public static BusinessService BusinessService { get; private set; }
         public static UI.Controls.CornerIcon CornerIcon { get; private set; }
 
+        private bool _dataLoaded;
+        private bool _shouldOpenWindow;
+        private double _openWindowTimer = 0;
+
         #region Service Managers
 
         internal SettingsManager SettingsManager => ModuleParameters.SettingsManager;
@@ -85,12 +89,36 @@ namespace DrmTracker
 
             Gw2ApiManager.SubtokenUpdated += OnApiSubTokenUpdated;
 
-            GameService.Overlay.UserLocale.SettingChanged += OnLocaleChanged;            
+            GameService.Overlay.UserLocale.SettingChanged += OnLocaleChanged;
         }
 
         private async void OnApiSubTokenUpdated(object sender, ValueEventArgs<IEnumerable<TokenPermission>> e)
         {
             await BusinessService.RefreshBaseData();
+
+            var userDrms = await BusinessService.GetAccountDrm();
+            // Load textures
+            _emblemTexture = ContentsManager.GetTexture("emblem.png");
+            _windowBackgroundTexture = AsyncTexture2D.FromAssetId(155985);
+
+            _mainWindow = new(
+                _windowBackgroundTexture,
+                new Rectangle(40, 26, 913, 691),
+                new Rectangle(100, 36, 839, 605),
+                _emblemTexture,
+                ModuleSettings,
+                BusinessService,
+                userDrms)
+            {
+                CanResize = true,
+                SavesSize = true,
+                SavesPosition = true,
+                Width = 1000,
+                Height = 500,
+            };
+            _mainWindow.BuildUi();
+
+            _dataLoaded = true;
         }
 
         private void OnLocaleChanged(object sender, ValueChangedEventArgs<Locale> eventArgs)
@@ -102,25 +130,6 @@ namespace DrmTracker
         {
             //Load Config
             BusinessService.LoadData();
-
-            // Load textures
-            _emblemTexture = ContentsManager.GetTexture("emblem.png");
-            //_windowBackgroundTexture = AsyncTexture2D.FromAssetId(155985);
-            _windowBackgroundTexture = AsyncTexture2D.FromAssetId(502049);
-
-            _mainWindow = new(
-                _windowBackgroundTexture,
-                new Rectangle(40, 26, 1203, 881),
-                new Rectangle(50, 26, 1193, 881),
-                _emblemTexture,
-                ModuleSettings,
-                BusinessService)
-            {
-                //Resize the window to prevent background texture to overflow
-                //Size = new Point(920, 700)
-                CanResize = true
-            };
-            _mainWindow.BuildUi();
         }
 
         protected override void OnModuleLoaded(EventArgs e)
@@ -135,7 +144,10 @@ namespace DrmTracker
         {
             CornerIcon.Click += delegate
             {
-                _mainWindow.ToggleWindow();
+                if (_dataLoaded)
+                    _mainWindow.ToggleWindow();
+                else
+                    _shouldOpenWindow = true;
             };
 
             _apiSpinner = new Controls.LoadingSpinner()
@@ -150,6 +162,22 @@ namespace DrmTracker
 
         protected override void Update(GameTime gameTime)
         {
+            if (_shouldOpenWindow)
+            {
+                if (_openWindowTimer > 1000)
+                {
+                    if (_dataLoaded)
+                    {
+                        _shouldOpenWindow = false;
+                        _mainWindow.ToggleWindow();
+                    }
+                    _openWindowTimer = 0;
+                }
+                else
+                {
+                    _openWindowTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
+            }
         }
 
         // For a good module experience, your module should clean up ANY and ALL entities

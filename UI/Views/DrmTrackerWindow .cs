@@ -26,9 +26,11 @@ namespace DrmTracker.UI.Views
         private List<Map> _maps;
         private List<Faction> _factions;
         private List<Drm> _drms;
+        private List<DrmProgression> _accountDrms;
 
         public DrmTrackerWindow(AsyncTexture2D background, Rectangle windowRegion, Rectangle contentRegion,
-            AsyncTexture2D cornerIconTexture, ModuleSettings moduleSettings, BusinessService businessService) : base(background, windowRegion, contentRegion)
+            AsyncTexture2D cornerIconTexture, ModuleSettings moduleSettings, BusinessService businessService, 
+            List<DrmProgression> accountDrms) : base(background, windowRegion, contentRegion)
         {
             Parent = GameService.Graphics.SpriteScreen;
             Title = "DrmTracker";
@@ -42,6 +44,7 @@ namespace DrmTracker.UI.Views
             _factions = businessService.GetFactions();
             _maps = businessService.GetMaps();
             _drms = businessService.GetDrms();
+            _accountDrms = accountDrms;
         }
 
         public void BuildUi()
@@ -60,14 +63,6 @@ namespace DrmTracker.UI.Views
                 var newWidth = mainContainer.Width - 20;
                 _tableContainer.Width = newWidth;
             };
-
-            StandardButton button = new Controls.StandardButton()
-            {
-                SetLocalizedText = () => "strings.MainWindow_Button_Refresh_Label",
-                SetLocalizedTooltip = () => "strings.MainWindow_Button_Refresh_Tooltip",
-                Parent = mainContainer
-            };
-            button.Click += async (s, e) => await DrawLines();
 
             #region Notifications
             _tableContainer = new()
@@ -93,6 +88,8 @@ namespace DrmTracker.UI.Views
                 Visible = false,
             };
             #endregion Spinner
+
+            DrawLines();
         }
 
         private void AddHeaders(FlowPanel container)
@@ -106,16 +103,14 @@ namespace DrmTracker.UI.Views
             }
         }
 
-        private async Task DrawLines()
+        private void DrawLines()
         {
             _loadingSpinner.Visible = true;
-
-            var accountDrm = await _businessService.GetAccountDrm();
 
             //Lines
             foreach (var map in _maps)
             {
-                var drmProgression = accountDrm?.FirstOrDefault(a => a.Map == map.Id).AccountAchievement;
+                var drmProgression = _accountDrms?.FirstOrDefault(a => a.Map == map.Id).AccountAchievement;
 
                 var lineLabel = UiUtils.CreateLabel(map.ShortName, map.Name, _tableContainer);
 
@@ -135,7 +130,6 @@ namespace DrmTracker.UI.Views
 
             _loadingSpinner.Visible = false;
         }
-
 
         private Color GetBackgroundColor(Gw2Sharp.WebApi.V2.Models.AccountAchievement accountAchievement, string type)
         {
