@@ -22,14 +22,17 @@ namespace DrmTracker.UI.Views
         private FlowPanel _tableContainer;
 
         private readonly List<Label> _labels = new();
+        private readonly List<StandardButton> _buttons = new();
 
         private List<Map> _maps;
         private List<Faction> _factions;
         private List<Drm> _drms;
         private List<DrmProgression> _accountDrms;
 
+        private List<(Panel, Label)> _tablePanels = new();
+
         public DrmTrackerWindow(AsyncTexture2D background, Rectangle windowRegion, Rectangle contentRegion,
-            AsyncTexture2D cornerIconTexture, ModuleSettings moduleSettings, BusinessService businessService, 
+            AsyncTexture2D cornerIconTexture, ModuleSettings moduleSettings, BusinessService businessService,
             List<DrmProgression> accountDrms) : base(background, windowRegion, contentRegion)
         {
             Parent = GameService.Graphics.SpriteScreen;
@@ -89,6 +92,28 @@ namespace DrmTracker.UI.Views
             };
             #endregion Spinner
 
+            #region Actions
+            Controls.FlowPanel actionContainer = new()
+            {
+                Parent = mainContainer,
+                WidthSizingMode = SizingMode.Fill,
+                HeightSizingMode = SizingMode.AutoSize,
+                ShowBorder = true,
+                OuterControlPadding = new(5),
+                ControlPadding = new(5),
+            };
+            actionContainer.ContentResized += ActionContainer_ContentResized;
+
+            StandardButton button;
+            _buttons.Add(button = new Controls.StandardButton()
+            {
+                SetLocalizedText = () => "Refresh",
+                Parent = actionContainer
+            });
+            button.Click += async (s, e) => await RefreshData();
+
+            #endregion Actions
+
             DrawLines();
         }
 
@@ -103,9 +128,17 @@ namespace DrmTracker.UI.Views
             }
         }
 
-        private void DrawLines()
+        private void DrawLines(bool clear = false)
         {
             _loadingSpinner.Visible = true;
+
+            if (clear)
+            {
+                for (int i = _tablePanels.Count - 1; i >= 0; i--)
+                {
+                    _tablePanels.ElementAt(i).Item1.Dispose();
+                }
+            }
 
             //Lines
             foreach (var map in _maps)
@@ -113,22 +146,32 @@ namespace DrmTracker.UI.Views
                 var drmProgression = _accountDrms?.FirstOrDefault(a => a.Map == map.Id).AccountAchievement;
 
                 var lineLabel = UiUtils.CreateLabel(map.ShortName, map.Name, _tableContainer);
+                _tablePanels.Add(lineLabel);
 
                 var label = UiUtils.CreateLabel("", "", _tableContainer);
                 label.panel.BackgroundColor = GetBackgroundColor(drmProgression?.Clear, "Clear");
                 //label.label.Text = "2"; //TODO GERER RETOUR
+                _tablePanels.Add(label);
 
                 label = UiUtils.CreateLabel("", "", _tableContainer);
                 label.panel.BackgroundColor = GetBackgroundColor(drmProgression?.FullCM, "CM");
+                _tablePanels.Add(label);
 
                 foreach (var faction in _factions)
                 {
                     label = UiUtils.CreateLabel("", "", _tableContainer);
                     label.panel.BackgroundColor = GetBackgroundColorFaction(drmProgression?.Factions, map.Id, faction.Id);
+                    _tablePanels.Add(label);
                 }
             }
 
             _loadingSpinner.Visible = false;
+        }
+
+        private async Task RefreshData()
+        {
+            _accountDrms = await _businessService.GetAccountDrm(true);
+            DrawLines(true);
         }
 
         private Color GetBackgroundColor(Gw2Sharp.WebApi.V2.Models.AccountAchievement accountAchievement, string type)
@@ -191,6 +234,21 @@ namespace DrmTracker.UI.Views
                 foreach (var label in _labels)
                 {
                     label.Width = width - 10;
+                }
+            }
+        }
+
+        private void ActionContainer_ContentResized(object sender, RegionChangedEventArgs e)
+        {
+            if (_buttons?.Count >= 0)
+            {
+                int columns = 4;
+                var parent = _buttons.FirstOrDefault()?.Parent as FlowPanel;
+                int width = (parent?.ContentRegion.Width - (int)parent.OuterControlPadding.X - ((int)parent.ControlPadding.X * (columns - 1))) / columns ?? 100;
+
+                foreach (var button in _buttons)
+                {
+                    button.Width = width;
                 }
             }
         }
