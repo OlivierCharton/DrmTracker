@@ -139,9 +139,10 @@ namespace DrmTracker.UI.Views
 
         private Color GetBackgroundColor(Gw2Sharp.WebApi.V2.Models.AccountAchievement accountAchievement, string type)
         {
+            //No progress
             if (accountAchievement == null)
             {
-                return Color.GhostWhite;
+                return Color.Red;
             }
 
             if (type == "Clear")
@@ -167,9 +168,10 @@ namespace DrmTracker.UI.Views
 
         private Color GetBackgroundColorFaction(Gw2Sharp.WebApi.V2.Models.AccountAchievement accountAchievement, int mapId, int factionId)
         {
+            //No progress
             if (accountAchievement == null)
             {
-                return Color.GhostWhite;
+                return Color.Red;
             }
 
             var matchingDrm = _drms.FirstOrDefault(drm => drm.Map == mapId);

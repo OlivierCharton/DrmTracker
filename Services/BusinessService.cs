@@ -99,6 +99,9 @@ namespace DrmTracker.Services
 
             var accountProgression = await _gw2ApiService.GetAchievements(allApiIds);
 
+            if (accountProgression == null)
+                return;
+
             _accountDrm = mapApiIdsDict.Select(m => new DrmProgression
             {
                 Map = m.Key,
