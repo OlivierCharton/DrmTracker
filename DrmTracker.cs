@@ -118,7 +118,7 @@ namespace DrmTracker
             {
                 SavesPosition = true,
                 Width = 1200,
-                Height = 500,
+                Height = 550,
             };
             _mainWindow.BuildUi();
         }

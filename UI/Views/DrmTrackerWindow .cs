@@ -17,6 +17,10 @@ namespace DrmTracker.UI.Views
 {
     public class DrmTrackerWindow : StandardWindow
     {
+        private readonly Color _colorNone = Color.Black;
+        private readonly Color _colorTodo = Color.Red;
+        private readonly Color _colorDoing = Color.Blue;
+        private readonly Color _colorDone = Color.Green;
 
         private readonly ModuleSettings _moduleSettings;
         private readonly BusinessService _businessService;
@@ -121,6 +125,20 @@ namespace DrmTracker.UI.Views
             };
             #endregion Spinner
 
+            #region Legend
+            Controls.FlowPanel legendContainer = new()
+            {
+                Parent = mainContainer,
+                WidthSizingMode = SizingMode.Fill,
+                HeightSizingMode = SizingMode.AutoSize,
+                OuterControlPadding = new(5),
+                ControlPadding = new(5),
+            };
+
+            DrawLegend(legendContainer);
+
+            #endregion Legend
+
             DrawData();
         }
 
@@ -180,7 +198,7 @@ namespace DrmTracker.UI.Views
                 var lineLabel = UiUtils.CreateLabel(() => _mapsResx.GetString($"{map.Key}Label"), () => _mapsResx.GetString($"{map.Key}Tooltip"), _tableContainer, alignment: HorizontalAlignment.Left);
                 if ((drmProgression?.HasFullSuccess).GetValueOrDefault())
                 {
-                    lineLabel.label.TextColor = Color.Green;
+                    lineLabel.label.TextColor = _colorDone;
                 }
                 _tablePanels.Add(lineLabel);
 
@@ -205,6 +223,23 @@ namespace DrmTracker.UI.Views
             }
         }
 
+        private void DrawLegend(FlowPanel container)
+        {
+            var legend = UiUtils.CreateLabel(() => strings.Legend_Title, () => "", container, amount: 6);
+
+            legend = UiUtils.CreateLabel(() => strings.Legend_None, () => "", container, amount: 6);
+            legend.panel.BackgroundColor = _colorNone;
+
+            legend = UiUtils.CreateLabel(() => strings.Legend_Todo, () => "", container, amount: 6);
+            legend.panel.BackgroundColor = _colorTodo;
+
+            legend = UiUtils.CreateLabel(() => strings.Legend_Doing, () => "", container, amount: 6);
+            legend.panel.BackgroundColor = _colorDoing;
+
+            legend = UiUtils.CreateLabel(() => strings.Legend_Done, () => "", container, amount: 6);
+            legend.panel.BackgroundColor = _colorDone;
+        }
+
         private async Task RefreshData()
         {
             _loadingSpinner.Visible = true;
@@ -221,26 +256,26 @@ namespace DrmTracker.UI.Views
             //No progress
             if (accountAchievement == null)
             {
-                return Color.Red;
+                return _colorTodo;
             }
 
             if (type == "Clear")
             {
-                return accountAchievement.Done ? Color.Green : Color.Red;
+                return accountAchievement.Done ? _colorDone : _colorTodo;
             }
             else if (type == "CM")
             {
                 if (accountAchievement.Done)
-                    return Color.Green;
+                    return _colorDone;
 
-                return accountAchievement.Current > 0 ? Color.Blue : Color.Red;
+                return accountAchievement.Current > 0 ? _colorDoing : _colorTodo;
             }
             else
             {
                 if (accountAchievement.Done)
-                    return Color.Green;
+                    return _colorDone;
 
-                return accountAchievement.Current > 0 ? Color.Blue : Color.Red;
+                return accountAchievement.Current > 0 ? _colorDoing : _colorTodo;
             }
         }
 
@@ -249,19 +284,19 @@ namespace DrmTracker.UI.Views
             //No progress
             if (accountAchievement == null)
             {
-                return Color.Red;
+                return _colorTodo;
             }
 
             var matchingDrm = _drms.FirstOrDefault(drm => drm.Map == mapId);
             if (!matchingDrm.FactionsIds.Contains(factionId))
-                return Color.Black;
+                return _colorNone;
 
             if (accountAchievement.Done || accountAchievement.Bits.Contains(factionId))
             {
-                return Color.Green;
+                return _colorDone;
             }
 
-            return Color.Red;
+            return _colorTodo;
         }
 
         private void TableContainer_ContentResized(object sender, RegionChangedEventArgs e)

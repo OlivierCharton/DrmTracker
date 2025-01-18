@@ -79,6 +79,51 @@ namespace DrmTracker.Ressources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à In progress.
+        /// </summary>
+        internal static string Legend_Doing {
+            get {
+                return ResourceManager.GetString("Legend_Doing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Done.
+        /// </summary>
+        internal static string Legend_Done {
+            get {
+                return ResourceManager.GetString("Legend_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à N/A.
+        /// </summary>
+        internal static string Legend_None {
+            get {
+                return ResourceManager.GetString("Legend_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Legend:.
+        /// </summary>
+        internal static string Legend_Title {
+            get {
+                return ResourceManager.GetString("Legend_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à To do.
+        /// </summary>
+        internal static string Legend_Todo {
+            get {
+                return ResourceManager.GetString("Legend_Todo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Fetching Api Data.
         /// </summary>
         internal static string LoadingSpinner_Fetch {

@@ -132,4 +132,19 @@
   <data name="NoData" xml:space="preserve">
     <value>Pas de données, veuillez patienter et réessayer !</value>
   </data>
+  <data name="Legend_None" xml:space="preserve">
+    <value>Non applicable</value>
+  </data>
+  <data name="Legend_Doing" xml:space="preserve">
+    <value>En cours</value>
+  </data>
+  <data name="Legend_Todo" xml:space="preserve">
+    <value>A faire</value>
+  </data>
+  <data name="Legend_Done" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="Legend_Title" xml:space="preserve">
+    <value>Légende :</value>
+  </data>
 </root>

@@ -8,4 +8,3 @@ https://api.guildwars2.com/v2/achievements?lang=en&ids=5644
 
 
 - Icon
-- legend
