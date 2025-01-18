@@ -4,7 +4,7 @@ namespace DrmTracker.Utils
 {
     public static class UiUtils
     {
-        public static (FlowPanel panel, Label label) CreateLabel(string labelText, string tooltipText, FlowPanel parent, int amount = 12, int ctrlWidth = 50)
+        public static (FlowPanel panel, Label label) CreateLabel(string labelText, string tooltipText, FlowPanel parent, int amount = 12, HorizontalAlignment alignment = HorizontalAlignment.Center)
         {
             FlowPanel panel = new()
             {
@@ -12,7 +12,7 @@ namespace DrmTracker.Utils
                 FlowDirection = ControlFlowDirection.SingleLeftToRight,
                 ControlPadding = new(5),
                 BasicTooltipText = tooltipText,
-                HeightSizingMode = SizingMode.AutoSize
+                HeightSizingMode = SizingMode.AutoSize,
             };
 
             Label label = new()
@@ -21,14 +21,12 @@ namespace DrmTracker.Utils
                 Text = labelText,
                 Height = 25,
                 VerticalAlignment = VerticalAlignment.Middle,
-                HorizontalAlignment = HorizontalAlignment.Center,
+                HorizontalAlignment = alignment,
                 BasicTooltipText = tooltipText,
-                AutoSizeWidth = true,
             };
 
             void FitToPanel(object sender, RegionChangedEventArgs e)
             {
-                label.Width = panel.ContentRegion.Width - ((int)panel.ControlPadding.X * amount);
                 panel.Invalidate();
             }
 
@@ -36,6 +34,7 @@ namespace DrmTracker.Utils
             {
                 int width = (parent.ContentRegion.Width - (int)(parent.ControlPadding.X * (amount - 1))) / amount;
                 panel.Width = width;
+                label.Width = width;
                 panel.Invalidate();
             }
 

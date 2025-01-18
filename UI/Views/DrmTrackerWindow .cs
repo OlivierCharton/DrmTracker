@@ -145,7 +145,7 @@ namespace DrmTracker.UI.Views
             {
                 var drmProgression = _accountDrms?.FirstOrDefault(a => a.Map == map.Id)?.AccountAchievement;
 
-                var lineLabel = UiUtils.CreateLabel(map.ShortName, map.Name, _tableContainer);
+                var lineLabel = UiUtils.CreateLabel(map.ShortName, map.Name, _tableContainer, alignment: HorizontalAlignment.Left);
                 if ((drmProgression?.HasFullSuccess).GetValueOrDefault())
                 {
                     lineLabel.label.TextColor = Color.Green;
@@ -154,11 +154,14 @@ namespace DrmTracker.UI.Views
 
                 var label = UiUtils.CreateLabel("", "", _tableContainer);
                 label.panel.BackgroundColor = GetBackgroundColor(drmProgression?.Clear, "Clear");
-                //label.label.Text = "2"; //TODO GERER RETOUR
                 _tablePanels.Add(label);
 
                 label = UiUtils.CreateLabel("", "", _tableContainer);
                 label.panel.BackgroundColor = GetBackgroundColor(drmProgression?.FullCM, "CM");
+                if (drmProgression?.FullCM != null && !drmProgression.FullCM.Done)
+                {
+                    label.label.Text = $"{drmProgression.FullCM.Current} / {drmProgression.FullCM.Max}";
+                }
                 _tablePanels.Add(label);
 
                 foreach (var faction in _factions)
