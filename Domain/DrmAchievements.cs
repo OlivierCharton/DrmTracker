@@ -7,5 +7,10 @@ namespace DrmTracker.Domain
         public AccountAchievement Clear { get; set; }
         public AccountAchievement FullCM { get; set; }
         public AccountAchievement Factions { get; set; }
+
+        public bool HasFullSuccess => 
+            (Clear != null && Clear.Done) && 
+            (FullCM != null && FullCM.Done) &&
+            (Factions != null && Factions.Done);
     }
 }
