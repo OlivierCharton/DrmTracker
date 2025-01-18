@@ -2,13 +2,16 @@
 using Blish_HUD.Content;
 using Blish_HUD.Controls;
 using DrmTracker.Domain;
+using DrmTracker.Ressources;
 using DrmTracker.Services;
 using DrmTracker.Utils;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Threading.Tasks;
 using Color = Microsoft.Xna.Framework.Color;
+using FlowPanel = DrmTracker.UI.Controls.FlowPanel;
 
 namespace DrmTracker.UI.Views
 {
@@ -31,6 +34,8 @@ namespace DrmTracker.UI.Views
 
         private List<(Panel, Label)> _tablePanels = new();
 
+        private ResourceManager _mapsResx;
+
         public DrmTrackerWindow(AsyncTexture2D background, Rectangle windowRegion, Rectangle contentRegion,
             AsyncTexture2D cornerIconTexture, ModuleSettings moduleSettings, BusinessService businessService,
             List<DrmProgression> accountDrms) : base(background, windowRegion, contentRegion)
@@ -48,6 +53,7 @@ namespace DrmTracker.UI.Views
             _maps = businessService.GetMaps();
             _drms = businessService.GetDrms();
             _accountDrms = accountDrms;
+            _mapsResx = maps.ResourceManager;
         }
 
         public void BuildUi()
@@ -106,7 +112,7 @@ namespace DrmTracker.UI.Views
             StandardButton button;
             _buttons.Add(button = new Controls.StandardButton()
             {
-                SetLocalizedText = () => "Refresh",
+                SetLocalizedText = () => strings.MainWindow_Button_Refresh_Label,
                 Parent = actionContainer
             });
             button.Click += async (s, e) => await RefreshData();
@@ -118,12 +124,12 @@ namespace DrmTracker.UI.Views
 
         private void AddHeaders(FlowPanel container)
         {
-            _labels.Add(UiUtils.CreateLabel("", "", container).label);
-            _labels.Add(UiUtils.CreateLabel("Clear", "", container).label);
-            _labels.Add(UiUtils.CreateLabel("CM", "", container).label);
+            _labels.Add(UiUtils.CreateLabel(() => "", () => "", container).label);
+            _labels.Add(UiUtils.CreateLabel(() => "Clear", () => "", container).label);
+            _labels.Add(UiUtils.CreateLabel(() => "CM", () => "", container).label);
             foreach (var faction in _factions)
             {
-                _labels.Add(UiUtils.CreateLabel(faction.ShortName, faction.Name, container).label);
+                _labels.Add(UiUtils.CreateLabel(() => faction.ShortName, () => faction.Name, container).label);
             }
         }
 
@@ -144,28 +150,28 @@ namespace DrmTracker.UI.Views
             {
                 var drmProgression = _accountDrms?.FirstOrDefault(a => a.Map == map.Id)?.AccountAchievement;
 
-                var lineLabel = UiUtils.CreateLabel(map.ShortName, map.Name, _tableContainer, alignment: HorizontalAlignment.Left);
+                var lineLabel = UiUtils.CreateLabel(() => _mapsResx.GetString($"{map.Key}Label"), () => _mapsResx.GetString($"{map.Key}Tooltip"), _tableContainer, alignment: HorizontalAlignment.Left);
                 if ((drmProgression?.HasFullSuccess).GetValueOrDefault())
                 {
                     lineLabel.label.TextColor = Color.Green;
                 }
                 _tablePanels.Add(lineLabel);
 
-                var label = UiUtils.CreateLabel("", "", _tableContainer);
+                var label = UiUtils.CreateLabel(() => "", () => "", _tableContainer);
                 label.panel.BackgroundColor = GetBackgroundColor(drmProgression?.Clear, "Clear");
                 _tablePanels.Add(label);
 
-                label = UiUtils.CreateLabel("", "", _tableContainer);
+                label = UiUtils.CreateLabel(() => "", () => "", _tableContainer);
                 label.panel.BackgroundColor = GetBackgroundColor(drmProgression?.FullCM, "CM");
                 if (drmProgression?.FullCM != null && !drmProgression.FullCM.Done)
                 {
-                    label.label.Text = $"{drmProgression.FullCM.Current} / {drmProgression.FullCM.Max}";
+                    label.label.SetLocalizedText = () => $"{drmProgression.FullCM.Current} / {drmProgression.FullCM.Max}";
                 }
                 _tablePanels.Add(label);
 
                 foreach (var faction in _factions)
                 {
-                    label = UiUtils.CreateLabel("", "", _tableContainer);
+                    label = UiUtils.CreateLabel(() => "", () => "", _tableContainer);
                     label.panel.BackgroundColor = GetBackgroundColorFaction(drmProgression?.Factions, map.Id, faction.Id);
                     _tablePanels.Add(label);
                 }
@@ -204,7 +210,6 @@ namespace DrmTracker.UI.Views
                 if (accountAchievement.Done)
                     return Color.Green;
 
-                //TODO : tooltip ou autre sur factions manquantes
                 return accountAchievement.Current > 0 ? Color.Blue : Color.Red;
             }
         }

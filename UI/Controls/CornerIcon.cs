@@ -1,6 +1,7 @@
 ﻿using Blish_HUD;
 using Blish_HUD.Modules.Managers;
 using DrmTracker.Interfaces;
+using DrmTracker.Ressources;
 using DrmTracker.Services;
 using Gw2Sharp.WebApi;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,13 +52,13 @@ namespace DrmTracker.UI.Controls
             {
                 Icon = _cornerIconHoverWarningTexture;
                 HoverIcon = _cornerIconHoverWarningTexture;
-                SetLocalizedTooltip = () => "strings.CornerIcon_Tooltip_Warning";
+                SetLocalizedTooltip = () => strings.CornerIcon_Tooltip_Warning;
             }
             else
             {
                 Icon = _cornerIconTexture;
                 HoverIcon = _cornerIconHoverTexture;
-                SetLocalizedTooltip = () => "strings.CornerIcon_Tooltip";
+                SetLocalizedTooltip = () => strings.CornerIcon_Tooltip;
             }
         }
 

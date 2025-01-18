@@ -2,63 +2,43 @@
   "Maps": [
     {
       "Id": 1,
-      "Name": "Metrica Province",
-      "NameFrenchLocale": "Province de Metrica",
-      "ShortName": "Metrica"
+      "Key": "Metrica"
     },
     {
       "Id": 2,
-      "Name": "Brisban Wildlands",
-      "NameFrenchLocale": "Terres sauvages de Brisban",
-      "ShortName": "Brisban"
+      "Key": "Brisban"
     },
     {
       "Id": 3,
-      "Name": "Gendarran Fields",
-      "NameFrenchLocale": "Champs de Gendarran",
-      "ShortName": "Gendarran"
+      "Key": "Gendarran"
     },
     {
       "Id": 4,
-      "Name": "Fields of Ruin",
-      "NameFrenchLocale": "Champs de ruine",
-      "ShortName": "Ruins"
+      "Key": "Ruins"
     },
     {
       "Id": 5,
-      "Name": "Thunderhead Peaks",
-      "NameFrenchLocale": "Pics de Chef-Tonnerre",
-      "ShortName": "Thunderhead"
+      "Key": "Thunderhead"
     },
     {
       "Id": 6,
-      "Name": "Lake Doric",
-      "NameFrenchLocale": "Lac Doric",
-      "ShortName": "Doric"
+      "Key": "Doric"
     },
     {
       "Id": 7,
-      "Name": "Snowden Drifts",
-      "NameFrenchLocale": "Congères d'Antreneige",
-      "ShortName": "Snowden"
+      "Key": "Snowden"
     },
     {
       "Id": 8,
-      "Name": "Caledon Forest",
-      "NameFrenchLocale": "Forêt de Caledon",
-      "ShortName": "Caledon"
+      "Key": "Caledon"
     },
     {
       "Id": 9,
-      "Name": "Bloodtide Coast",
-      "NameFrenchLocale": "Côte de la marée sanglante",
-      "ShortName": "Bloodtide"
+      "Key": "Bloodtide"
     },
     {
       "Id": 10,
-      "Name": "Fireheart Rise",
-      "NameFrenchLocale": "Montée de Flambecœur",
-      "ShortName": "Fireheart"
+      "Key": "Fireheart"
     }
   ],
   "Factions": [

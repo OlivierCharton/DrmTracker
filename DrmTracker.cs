@@ -6,6 +6,7 @@ using Blish_HUD.Modules;
 using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
 using DrmTracker.Domain;
+using DrmTracker.Ressources;
 using DrmTracker.Services;
 using DrmTracker.UI.Controls;
 using DrmTracker.UI.Views;
@@ -113,7 +114,7 @@ namespace DrmTracker
                 CanResize = true,
                 SavesSize = true,
                 SavesPosition = true,
-                Width = 1000,
+                Width = 1050,
                 Height = 500,
             };
             _mainWindow.BuildUi();
@@ -155,7 +156,7 @@ namespace DrmTracker
                 Location = new Point(CornerIcon.Left, CornerIcon.Bottom + 3),
                 Parent = GameService.Graphics.SpriteScreen,
                 Size = new Point(CornerIcon.Width, CornerIcon.Height),
-                SetLocalizedTooltip = () => "strings.LoadingSpinner_Fetch",
+                SetLocalizedTooltip = () => strings.LoadingSpinner_Fetch,
                 Visible = false
             };
         }

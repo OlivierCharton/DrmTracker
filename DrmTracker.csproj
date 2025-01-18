@@ -23,7 +23,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Ressources\" />
+	  <Compile Update="Ressources\maps.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>maps.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Ressources\strings.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>strings.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Ressources\maps.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>maps.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Ressources\strings.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>strings.Designer.cs</LastGenOutput>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>

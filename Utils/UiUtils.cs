@@ -1,28 +1,31 @@
 ﻿using Blish_HUD.Controls;
+using System;
+using FlowPanel = DrmTracker.UI.Controls.FlowPanel;
+using Label = DrmTracker.UI.Controls.Label;
 
 namespace DrmTracker.Utils
 {
     public static class UiUtils
     {
-        public static (FlowPanel panel, Label label) CreateLabel(string labelText, string tooltipText, FlowPanel parent, int amount = 12, HorizontalAlignment alignment = HorizontalAlignment.Center)
+        public static (FlowPanel panel, Label label) CreateLabel(Func<string> labelText, Func<string> tooltipText, FlowPanel parent, int amount = 12, HorizontalAlignment alignment = HorizontalAlignment.Center)
         {
             FlowPanel panel = new()
             {
                 Parent = parent,
                 FlowDirection = ControlFlowDirection.SingleLeftToRight,
                 ControlPadding = new(5),
-                BasicTooltipText = tooltipText,
+                SetLocalizedTooltip = tooltipText,
                 HeightSizingMode = SizingMode.AutoSize,
             };
 
             Label label = new()
             {
                 Parent = panel,
-                Text = labelText,
+                SetLocalizedText = labelText,
                 Height = 25,
                 VerticalAlignment = VerticalAlignment.Middle,
                 HorizontalAlignment = alignment,
-                BasicTooltipText = tooltipText,
+                SetLocalizedTooltip = tooltipText,
             };
 
             void FitToPanel(object sender, RegionChangedEventArgs e)
