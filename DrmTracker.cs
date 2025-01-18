@@ -111,10 +111,8 @@ namespace DrmTracker
                 BusinessService,
                 userDrms)
             {
-                CanResize = true,
-                SavesSize = true,
                 SavesPosition = true,
-                Width = 1050,
+                Width = 1200,
                 Height = 500,
             };
             _mainWindow.BuildUi();
