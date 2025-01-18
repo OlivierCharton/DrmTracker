@@ -120,6 +120,7 @@ namespace DrmTracker
             _mainWindow.BuildUi();
 
             _dataLoaded = true;
+            CornerIcon.UpdateWarningState(false);
         }
 
         private void OnLocaleChanged(object sender, ValueChangedEventArgs<Locale> eventArgs)

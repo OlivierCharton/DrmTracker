@@ -92,15 +92,6 @@ namespace DrmTracker.UI.Views
 
             #endregion Notifications
 
-            #region Spinner
-            _loadingSpinner = new LoadingSpinner()
-            {
-                Parent = _tableContainer,
-                Size = new Point(29, 29),
-                Visible = false,
-            };
-            #endregion Spinner
-
             #region Actions
             Controls.FlowPanel actionContainer = new()
             {
@@ -122,6 +113,15 @@ namespace DrmTracker.UI.Views
 
             #endregion Actions
 
+            #region Spinner
+            _loadingSpinner = new LoadingSpinner()
+            {
+                Parent = actionContainer,
+                Size = new Point(29, 29),
+                Visible = false,
+            };
+            #endregion Spinner
+
             DrawLines();
         }
 
@@ -138,8 +138,6 @@ namespace DrmTracker.UI.Views
 
         private void DrawLines(bool clear = false)
         {
-            _loadingSpinner.Visible = true;
-
             if (clear)
             {
                 for (int i = _tablePanels.Count - 1; i >= 0; i--)
@@ -179,14 +177,16 @@ namespace DrmTracker.UI.Views
                     _tablePanels.Add(label);
                 }
             }
-
-            _loadingSpinner.Visible = false;
         }
 
         private async Task RefreshData()
         {
+            _loadingSpinner.Visible = true;
+
             _accountDrms = await _businessService.GetAccountDrm(true);
             DrawLines(true);
+
+            _loadingSpinner.Visible = false;
         }
 
         private Color GetBackgroundColor(Gw2Sharp.WebApi.V2.Models.AccountAchievement accountAchievement, string type)
