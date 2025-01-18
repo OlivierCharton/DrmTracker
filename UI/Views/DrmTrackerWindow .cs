@@ -38,8 +38,8 @@ namespace DrmTracker.UI.Views
         private ResourceManager _factionsResx;
 
         public DrmTrackerWindow(AsyncTexture2D background, Rectangle windowRegion, Rectangle contentRegion,
-            AsyncTexture2D cornerIconTexture, ModuleSettings moduleSettings, BusinessService businessService,
-            List<DrmProgression> accountDrms) : base(background, windowRegion, contentRegion)
+            AsyncTexture2D cornerIconTexture, ModuleSettings moduleSettings, BusinessService businessService
+           ) : base(background, windowRegion, contentRegion)
         {
             Parent = GameService.Graphics.SpriteScreen;
             Title = "DrmTracker";
@@ -53,7 +53,6 @@ namespace DrmTracker.UI.Views
             _factions = businessService.GetFactions();
             _maps = businessService.GetMaps();
             _drms = businessService.GetDrms();
-            _accountDrms = accountDrms;
 
             _mapsResx = maps.ResourceManager;
             _factionsResx = factions.ResourceManager;
@@ -122,7 +121,14 @@ namespace DrmTracker.UI.Views
             };
             #endregion Spinner
 
-            DrawLines();
+            DrawData();
+        }
+
+        public void InjectData(List<DrmProgression> accountDrms)
+        {
+            _accountDrms = accountDrms;
+
+            DrawData();
         }
 
         private void AddHeaders(FlowPanel container)
@@ -136,16 +142,36 @@ namespace DrmTracker.UI.Views
             }
         }
 
-        private void DrawLines(bool clear = false)
+        private void ClearLines()
         {
-            if (clear)
+            for (int i = _tablePanels.Count - 1; i >= 0; i--)
             {
-                for (int i = _tablePanels.Count - 1; i >= 0; i--)
-                {
-                    _tablePanels.ElementAt(i).Item1.Dispose();
-                }
+                _tablePanels.ElementAt(i).Item1.Dispose();
             }
+        }
 
+        private void DrawData()
+        {
+            ClearLines();
+
+            if (_accountDrms == null)
+            {
+                DrawEmptyTable();
+            }
+            else
+            {
+                DrawLines();
+            }
+        }
+
+        private void DrawEmptyTable()
+        {
+            var lineLabel = UiUtils.CreateLabel(() => strings.NoData, () => "", _tableContainer, alignment: HorizontalAlignment.Left, amount: 1);
+            _tablePanels.Add(lineLabel);
+        }
+
+        private void DrawLines()
+        {
             //Lines
             foreach (var map in _maps)
             {
@@ -184,7 +210,8 @@ namespace DrmTracker.UI.Views
             _loadingSpinner.Visible = true;
 
             _accountDrms = await _businessService.GetAccountDrm(true);
-            DrawLines(true);
+
+            DrawData();
 
             _loadingSpinner.Visible = false;
         }

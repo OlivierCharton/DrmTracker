@@ -95,5 +95,14 @@ namespace DrmTracker.Ressources {
                 return ResourceManager.GetString("MainWindow_Button_Refresh_Label", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No data, please wait a moment and refresh!.
+        /// </summary>
+        internal static string NoData {
+            get {
+                return ResourceManager.GetString("NoData", resourceCulture);
+            }
+        }
     }
 }

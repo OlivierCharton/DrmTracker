@@ -129,4 +129,7 @@
   <data name="MainWindow_Button_Refresh_Label" xml:space="preserve">
     <value>Rafraîchir</value>
   </data>
+  <data name="NoData" xml:space="preserve">
+    <value>Pas de données, veuillez patienter et réessayer !</value>
+  </data>
 </root>

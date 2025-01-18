@@ -5,7 +5,6 @@ using Blish_HUD.GameIntegration;
 using Blish_HUD.Modules;
 using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
-using DrmTracker.Domain;
 using DrmTracker.Ressources;
 using DrmTracker.Services;
 using DrmTracker.UI.Controls;
@@ -14,11 +13,9 @@ using Gw2Sharp.WebApi;
 using Gw2Sharp.WebApi.V2.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.IO;
 using System.Threading.Tasks;
 using Controls = DrmTracker.UI.Controls;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
@@ -34,10 +31,6 @@ namespace DrmTracker
         public static Gw2ApiService Gw2ApiService { get; private set; }
         public static BusinessService BusinessService { get; private set; }
         public static UI.Controls.CornerIcon CornerIcon { get; private set; }
-
-        private bool _dataLoaded;
-        private bool _shouldOpenWindow;
-        private double _openWindowTimer = 0;
 
         #region Service Managers
 
@@ -98,27 +91,7 @@ namespace DrmTracker
             await BusinessService.RefreshBaseData();
 
             var userDrms = await BusinessService.GetAccountDrm();
-            // Load textures
-            _emblemTexture = ContentsManager.GetTexture("emblem.png");
-            _windowBackgroundTexture = AsyncTexture2D.FromAssetId(155985);
-
-            _mainWindow = new(
-                _windowBackgroundTexture,
-                new Rectangle(40, 26, 913, 691),
-                new Rectangle(60, 36, 893, 675),
-                _emblemTexture,
-                ModuleSettings,
-                BusinessService,
-                userDrms)
-            {
-                SavesPosition = true,
-                Width = 1200,
-                Height = 500,
-            };
-            _mainWindow.BuildUi();
-
-            _dataLoaded = true;
-            CornerIcon.UpdateWarningState(false);
+            _mainWindow.InjectData(userDrms);
         }
 
         private void OnLocaleChanged(object sender, ValueChangedEventArgs<Locale> eventArgs)
@@ -130,6 +103,24 @@ namespace DrmTracker
         {
             //Load Config
             BusinessService.LoadData();
+
+            // Load textures
+            _emblemTexture = ContentsManager.GetTexture("emblem.png");
+            _windowBackgroundTexture = AsyncTexture2D.FromAssetId(155985);
+
+            _mainWindow = new(
+                _windowBackgroundTexture,
+                new Rectangle(40, 26, 913, 691),
+                new Rectangle(60, 36, 893, 675),
+                _emblemTexture,
+                ModuleSettings,
+                BusinessService)
+            {
+                SavesPosition = true,
+                Width = 1200,
+                Height = 500,
+            };
+            _mainWindow.BuildUi();
         }
 
         protected override void OnModuleLoaded(EventArgs e)
@@ -144,10 +135,7 @@ namespace DrmTracker
         {
             CornerIcon.Click += delegate
             {
-                if (_dataLoaded)
-                    _mainWindow.ToggleWindow();
-                else
-                    _shouldOpenWindow = true;
+                _mainWindow.ToggleWindow();
             };
 
             _apiSpinner = new Controls.LoadingSpinner()
@@ -162,22 +150,6 @@ namespace DrmTracker
 
         protected override void Update(GameTime gameTime)
         {
-            if (_shouldOpenWindow)
-            {
-                if (_openWindowTimer > 100)
-                {
-                    if (_dataLoaded)
-                    {
-                        _shouldOpenWindow = false;
-                        _mainWindow.ToggleWindow();
-                    }
-                    _openWindowTimer = 0;
-                }
-                else
-                {
-                    _openWindowTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-                }
-            }
         }
 
         // For a good module experience, your module should clean up ANY and ALL entities
