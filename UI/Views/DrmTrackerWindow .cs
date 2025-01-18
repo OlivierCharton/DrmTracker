@@ -35,6 +35,7 @@ namespace DrmTracker.UI.Views
         private List<(Panel, Label)> _tablePanels = new();
 
         private ResourceManager _mapsResx;
+        private ResourceManager _factionsResx;
 
         public DrmTrackerWindow(AsyncTexture2D background, Rectangle windowRegion, Rectangle contentRegion,
             AsyncTexture2D cornerIconTexture, ModuleSettings moduleSettings, BusinessService businessService,
@@ -53,7 +54,9 @@ namespace DrmTracker.UI.Views
             _maps = businessService.GetMaps();
             _drms = businessService.GetDrms();
             _accountDrms = accountDrms;
+
             _mapsResx = maps.ResourceManager;
+            _factionsResx = factions.ResourceManager;
         }
 
         public void BuildUi()
@@ -129,7 +132,7 @@ namespace DrmTracker.UI.Views
             _labels.Add(UiUtils.CreateLabel(() => "CM", () => "", container).label);
             foreach (var faction in _factions)
             {
-                _labels.Add(UiUtils.CreateLabel(() => faction.ShortName, () => faction.Name, container).label);
+                _labels.Add(UiUtils.CreateLabel(() => _factionsResx.GetString($"{faction.Key}Label"), () => _factionsResx.GetString($"{faction.Key}Tooltip"), container).label);
             }
         }
 

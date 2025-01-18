@@ -44,57 +44,39 @@
   "Factions": [
     {
       "Id": 0,
-      "Name": "Crystal Bloom",
-      "NameFrenchLocale": "Fleur de cristal",
-      "ShortName": "Crystal"
+      "Key": "Crystal"
     },
     {
       "Id": 1,
-      "Name": "Ebon Vanguard",
-      "NameFrenchLocale": "Avant-garde d'Ebon",
-      "ShortName": "Ebon"
+      "Key": "Ebon"
     },
     {
       "Id": 2,
-      "Name": "Deldrimor Dwarves",
-      "NameFrenchLocale": "Nains de Deldrimor",
-      "ShortName": "Deldrimor"
+      "Key": "Deldrimor"
     },
     {
       "Id": 3,
-      "Name": "Exalted",
-      "NameFrenchLocale": "Exaltés",
-      "ShortName": "Exalted"
+      "Key": "Exalted"
     },
     {
       "Id": 4,
-      "Name": "Tengu",
-      "NameFrenchLocale": "Tengus",
-      "ShortName": "Tengu"
+      "Key": "Tengu"
     },
     {
       "Id": 5,
-      "Name": "Kodan",
-      "NameFrenchLocale": "Kodans",
-      "ShortName": "Kodan"
+      "Key": "Kodan"
     },
     {
       "Id": 6,
-      "Name": "Skritt",
-      "NameFrenchLocale": "Skritts",
-      "ShortName": "Skritt"
+      "Key": "Skritt"
     },
     {
       "Id": 7,
-      "Name": "Olmakhan",
-      "NameFrenchLocale": "Olmakhans",
-      "ShortName": "Olmakhan"
+      "Key": "Olmakhan"
     },
     {
       "Id": 8,
-      "Name": "Flame Legion",
-      "NameFrenchLocale": "Légion de la Flamme",
-      "ShortName": "Legion"
+      "Key": "Legion"
     }
   ],
   "Drms": [

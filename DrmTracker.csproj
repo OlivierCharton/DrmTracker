@@ -23,6 +23,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Ressources\factions.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>factions.resx</DependentUpon>
+	  </Compile>
 	  <Compile Update="Ressources\maps.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -36,6 +41,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <EmbeddedResource Update="Ressources\factions.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>factions.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Ressources\maps.resx">
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>maps.Designer.cs</LastGenOutput>
