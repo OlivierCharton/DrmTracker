@@ -143,7 +143,7 @@ namespace DrmTracker.UI.Views
             //Lines
             foreach (var map in _maps)
             {
-                var drmProgression = _accountDrms?.FirstOrDefault(a => a.Map == map.Id).AccountAchievement;
+                var drmProgression = _accountDrms?.FirstOrDefault(a => a.Map == map.Id)?.AccountAchievement;
 
                 var lineLabel = UiUtils.CreateLabel(map.ShortName, map.Name, _tableContainer);
                 _tablePanels.Add(lineLabel);

@@ -63,55 +63,55 @@
   ],
   "Factions": [
     {
-      "Id": 1,
+      "Id": 0,
       "Name": "Crystal Bloom",
       "NameFrenchLocale": "Fleur de cristal",
       "ShortName": "Crystal"
     },
     {
-      "Id": 2,
+      "Id": 1,
       "Name": "Ebon Vanguard",
       "NameFrenchLocale": "Avant-garde d'Ebon",
       "ShortName": "Ebon"
     },
     {
-      "Id": 3,
+      "Id": 2,
       "Name": "Deldrimor Dwarves",
       "NameFrenchLocale": "Nains de Deldrimor",
       "ShortName": "Deldrimor"
     },
     {
-      "Id": 4,
+      "Id": 3,
       "Name": "Exalted",
       "NameFrenchLocale": "Exaltés",
       "ShortName": "Exalted"
     },
     {
-      "Id": 5,
+      "Id": 4,
       "Name": "Tengu",
       "NameFrenchLocale": "Tengus",
       "ShortName": "Tengu"
     },
     {
-      "Id": 6,
+      "Id": 5,
       "Name": "Kodan",
       "NameFrenchLocale": "Kodans",
       "ShortName": "Kodan"
     },
     {
-      "Id": 7,
+      "Id": 6,
       "Name": "Skritt",
       "NameFrenchLocale": "Skritts",
       "ShortName": "Skritt"
     },
     {
-      "Id": 8,
+      "Id": 7,
       "Name": "Olmakhan",
       "NameFrenchLocale": "Olmakhans",
       "ShortName": "Olmakhan"
     },
     {
-      "Id": 9,
+      "Id": 8,
       "Name": "Flame Legion",
       "NameFrenchLocale": "Légion de la Flamme",
       "ShortName": "Legion"
@@ -125,13 +125,7 @@
         "FullCM": 5511,
         "Factions": 5709
       },
-      "FactionsIds": [
-        1,
-        3,
-        5,
-        7,
-        8
-      ]
+      "FactionsIds": [ 0, 2, 4, 6, 7 ]
     },
     {
       "Map": 2,
@@ -140,12 +134,7 @@
         "FullCM": 5475,
         "Factions": 5698
       },
-      "FactionsIds": [
-        1,
-        4,
-        5,
-        7
-      ]
+      "FactionsIds": [ 0, 3, 4, 6 ]
     },
     {
       "Map": 3,
@@ -154,12 +143,7 @@
         "FullCM": 5496,
         "Factions": 5700
       },
-      "FactionsIds": [
-        2,
-        3,
-        6,
-        9
-      ]
+      "FactionsIds": [ 1, 2, 5, 8 ]
     },
     {
       "Map": 4,
@@ -168,14 +152,7 @@
         "FullCM": 5589,
         "Factions": 5693
       },
-      "FactionsIds": [
-        1,
-        2,
-        3,
-        7,
-        8,
-        9
-      ]
+      "FactionsIds": [ 0, 1, 2, 6, 7, 8 ]
     },
     {
       "Map": 5,
@@ -184,15 +161,7 @@
         "FullCM": 5569,
         "Factions": 5703
       },
-      "FactionsIds": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        8
-      ]
+      "FactionsIds": [ 0, 1, 2, 3, 4, 5, 7 ]
     },
     {
       "Map": 6,
@@ -201,13 +170,7 @@
         "FullCM": 5555,
         "Factions": 5697
       },
-      "FactionsIds": [
-        1,
-        2,
-        4,
-        6,
-        7
-      ]
+      "FactionsIds": [ 0, 1, 3, 5, 6 ]
     },
     {
       "Map": 7,
@@ -216,13 +179,7 @@
         "FullCM": 5593,
         "Factions": 5708
       },
-      "FactionsIds": [
-        1,
-        2,
-        3,
-        6,
-        9
-      ]
+      "FactionsIds": [ 0, 1, 2, 5, 8 ]
     },
     {
       "Map": 8,
@@ -231,12 +188,7 @@
         "FullCM": 5644,
         "Factions": 5691
       },
-      "FactionsIds": [
-        4,
-        5,
-        7,
-        8
-      ]
+      "FactionsIds": [ 3, 4, 6, 7 ]
     },
     {
       "Map": 9,
@@ -245,13 +197,7 @@
         "FullCM": 5622,
         "Factions": 5688
       },
-      "FactionsIds": [
-        4,
-        5,
-        7,
-        8,
-        9
-      ]
+      "FactionsIds": [ 3, 4, 6, 7, 8 ]
     },
     {
       "Map": 10,
@@ -260,12 +206,7 @@
         "FullCM": 5663,
         "Factions": 5704
       },
-      "FactionsIds": [
-        2,
-        3,
-        6,
-        9
-      ]
+      "FactionsIds": [ 1, 2, 5, 8 ]
     }
   ]
 }
