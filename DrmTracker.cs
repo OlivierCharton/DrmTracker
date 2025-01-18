@@ -104,7 +104,7 @@ namespace DrmTracker
             _mainWindow = new(
                 _windowBackgroundTexture,
                 new Rectangle(40, 26, 913, 691),
-                new Rectangle(100, 36, 839, 605),
+                new Rectangle(60, 36, 893, 675),
                 _emblemTexture,
                 ModuleSettings,
                 BusinessService,
@@ -164,7 +164,7 @@ namespace DrmTracker
         {
             if (_shouldOpenWindow)
             {
-                if (_openWindowTimer > 1000)
+                if (_openWindowTimer > 100)
                 {
                     if (_dataLoaded)
                     {

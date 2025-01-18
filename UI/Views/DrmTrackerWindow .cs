@@ -98,7 +98,6 @@ namespace DrmTracker.UI.Views
                 Parent = mainContainer,
                 WidthSizingMode = SizingMode.Fill,
                 HeightSizingMode = SizingMode.AutoSize,
-                ShowBorder = true,
                 OuterControlPadding = new(5),
                 ControlPadding = new(5),
             };
