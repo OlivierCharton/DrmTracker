@@ -24,9 +24,9 @@ namespace DrmTracker.UI.Controls
             UserLocale_SettingChanged(null, null);
 
             _cornerIconTexture = contentsManager.GetTexture("corner.png");
-            _cornerIconWarningTexture = contentsManager.GetTexture("corner_warn.png");
-            _cornerIconHoverTexture = contentsManager.GetTexture("corner-hover.png");
-            _cornerIconHoverWarningTexture = contentsManager.GetTexture("corner-hover_warn.png");
+            _cornerIconWarningTexture = contentsManager.GetTexture("corner.png");
+            _cornerIconHoverTexture = contentsManager.GetTexture("corner.png");
+            _cornerIconHoverWarningTexture = contentsManager.GetTexture("corner.png");
 
             UpdateWarningState(false);
         }
