@@ -10,18 +10,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
 using System.Threading.Tasks;
-using Color = Microsoft.Xna.Framework.Color;
 using FlowPanel = DrmTracker.UI.Controls.FlowPanel;
 
 namespace DrmTracker.UI.Views
 {
     public class DrmTrackerWindow : StandardWindow
     {
-        private readonly Color _colorNone = Color.Black;
-        private readonly Color _colorTodo = Color.Red;
-        private readonly Color _colorDoing = Color.Blue;
-        private readonly Color _colorDone = Color.Green;
-
         private readonly ModuleSettings _moduleSettings;
         private readonly BusinessService _businessService;
 
@@ -198,7 +192,7 @@ namespace DrmTracker.UI.Views
                 var lineLabel = UiUtils.CreateLabel(() => _mapsResx.GetString($"{map.Key}Label"), () => _mapsResx.GetString($"{map.Key}Tooltip"), _tableContainer, alignment: HorizontalAlignment.Left);
                 if ((drmProgression?.HasFullSuccess).GetValueOrDefault())
                 {
-                    lineLabel.label.TextColor = _colorDone;
+                    lineLabel.label.TextColor = Colors.Done;
                 }
                 _tablePanels.Add(lineLabel);
 
@@ -208,9 +202,9 @@ namespace DrmTracker.UI.Views
 
                 label = UiUtils.CreateLabel(() => "", () => "", _tableContainer);
                 label.panel.BackgroundColor = GetBackgroundColor(drmProgression?.FullCM, "CM");
-                if (drmProgression?.FullCM != null && !drmProgression.FullCM.Done)
+                if (drmProgression?.FullCM == null || (drmProgression?.FullCM != null && !drmProgression.FullCM.Done))
                 {
-                    label.label.SetLocalizedText = () => $"{drmProgression.FullCM.Current} / {drmProgression.FullCM.Max}";
+                    label.label.SetLocalizedText = () => $"{drmProgression.FullCM?.Current ?? 0} / {drmProgression.FullCM?.Max ?? 5}";
                 }
                 _tablePanels.Add(label);
 
@@ -228,16 +222,13 @@ namespace DrmTracker.UI.Views
             var legend = UiUtils.CreateLabel(() => strings.Legend_Title, () => "", container, amount: 6);
 
             legend = UiUtils.CreateLabel(() => strings.Legend_None, () => "", container, amount: 6);
-            legend.panel.BackgroundColor = _colorNone;
+            legend.panel.BackgroundColor = Colors.None;
 
             legend = UiUtils.CreateLabel(() => strings.Legend_Todo, () => "", container, amount: 6);
-            legend.panel.BackgroundColor = _colorTodo;
-
-            legend = UiUtils.CreateLabel(() => strings.Legend_Doing, () => "", container, amount: 6);
-            legend.panel.BackgroundColor = _colorDoing;
+            legend.panel.BackgroundColor = Colors.Todo;
 
             legend = UiUtils.CreateLabel(() => strings.Legend_Done, () => "", container, amount: 6);
-            legend.panel.BackgroundColor = _colorDone;
+            legend.panel.BackgroundColor = Colors.Done;
         }
 
         private async Task RefreshData()
@@ -256,26 +247,19 @@ namespace DrmTracker.UI.Views
             //No progress
             if (accountAchievement == null)
             {
-                return _colorTodo;
+                return Colors.Todo;
             }
 
             if (type == "Clear")
             {
-                return accountAchievement.Done ? _colorDone : _colorTodo;
-            }
-            else if (type == "CM")
-            {
-                if (accountAchievement.Done)
-                    return _colorDone;
-
-                return accountAchievement.Current > 0 ? _colorDoing : _colorTodo;
+                return accountAchievement.Done ? Colors.Done : Colors.Todo;
             }
             else
             {
                 if (accountAchievement.Done)
-                    return _colorDone;
+                    return Colors.Done;
 
-                return accountAchievement.Current > 0 ? _colorDoing : _colorTodo;
+                return Colors.Todo;
             }
         }
 
@@ -284,19 +268,19 @@ namespace DrmTracker.UI.Views
             //No progress
             if (accountAchievement == null)
             {
-                return _colorTodo;
+                return Colors.Todo;
             }
 
             var matchingDrm = _drms.FirstOrDefault(drm => drm.Map == mapId);
             if (!matchingDrm.FactionsIds.Contains(factionId))
-                return _colorNone;
+                return Colors.None;
 
             if (accountAchievement.Done || accountAchievement.Bits.Contains(factionId))
             {
-                return _colorDone;
+                return Colors.Done;
             }
 
-            return _colorTodo;
+            return Colors.Todo;
         }
 
         private void TableContainer_ContentResized(object sender, RegionChangedEventArgs e)

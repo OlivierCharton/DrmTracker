@@ -79,15 +79,6 @@ namespace DrmTracker.Ressources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à In progress.
-        /// </summary>
-        internal static string Legend_Doing {
-            get {
-                return ResourceManager.GetString("Legend_Doing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Done.
         /// </summary>
         internal static string Legend_Done {

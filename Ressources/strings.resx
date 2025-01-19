@@ -135,9 +135,6 @@
   <data name="Legend_None" xml:space="preserve">
     <value>N/A</value>
   </data>
-  <data name="Legend_Doing" xml:space="preserve">
-    <value>In progress</value>
-  </data>
   <data name="Legend_Todo" xml:space="preserve">
     <value>To do</value>
   </data>
