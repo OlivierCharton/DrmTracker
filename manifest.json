@@ -1,10 +1,10 @@
 {
   "name": "DrmTracker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "namespace": "japyx.drmtracker",
   "package": "DrmTracker.dll",
   "manifest_version": 1,
-  "description": "A module to track drms",
+  "description": "A module to help you track your Dragon Response Missions (DRM) completion to ease the selection process when you play with someone !",
   "dependencies": {
     "bh.blishhud": ">=1.0.0"
   },
