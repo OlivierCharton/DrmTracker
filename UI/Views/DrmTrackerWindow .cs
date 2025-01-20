@@ -94,7 +94,7 @@ namespace DrmTracker.UI.Views
             {
                 Parent = mainContainer,
                 WidthSizingMode = SizingMode.Fill,
-                HeightSizingMode = SizingMode.AutoSize,
+                Height = 35,
                 OuterControlPadding = new(5),
                 ControlPadding = new(5),
             };
@@ -219,15 +219,15 @@ namespace DrmTracker.UI.Views
 
         private void DrawLegend(FlowPanel container)
         {
-            var legend = UiUtils.CreateLabel(() => strings.Legend_Title, () => "", container, amount: 6);
+            var legend = UiUtils.CreateLabel(() => strings.Legend_Title, () => "", container, amount: 12);
 
-            legend = UiUtils.CreateLabel(() => strings.Legend_None, () => "", container, amount: 6);
+            legend = UiUtils.CreateLabel(() => strings.Legend_None, () => "", container, amount: 11);
             legend.panel.BackgroundColor = Colors.None;
 
-            legend = UiUtils.CreateLabel(() => strings.Legend_Todo, () => "", container, amount: 6);
+            legend = UiUtils.CreateLabel(() => strings.Legend_Todo, () => "", container, amount: 11);
             legend.panel.BackgroundColor = Colors.Todo;
 
-            legend = UiUtils.CreateLabel(() => strings.Legend_Done, () => "", container, amount: 6);
+            legend = UiUtils.CreateLabel(() => strings.Legend_Done, () => "", container, amount: 11);
             legend.panel.BackgroundColor = Colors.Done;
         }
 
@@ -302,7 +302,7 @@ namespace DrmTracker.UI.Views
         {
             if (_buttons?.Count >= 0)
             {
-                int columns = 4;
+                int columns = 9;
                 var parent = _buttons.FirstOrDefault()?.Parent as FlowPanel;
                 int width = (parent?.ContentRegion.Width - (int)parent.OuterControlPadding.X - ((int)parent.ControlPadding.X * (columns - 1))) / columns ?? 100;
 
