@@ -196,11 +196,11 @@ namespace DrmTracker.UI.Views
                 }
                 _tablePanels.Add(lineLabel);
 
-                var label = UiUtils.CreateLabel(() => "", () => "", _tableContainer);
+                var label = UiUtils.CreateLabel(() => "", () => $"{_mapsResx.GetString($"{map.Key}Tooltip")} - Clear", _tableContainer);
                 label.panel.BackgroundColor = GetBackgroundColor(drmProgression?.Clear, "Clear");
                 _tablePanels.Add(label);
 
-                label = UiUtils.CreateLabel(() => "", () => "", _tableContainer);
+                label = UiUtils.CreateLabel(() => "", () => $"{_mapsResx.GetString($"{map.Key}Tooltip")} - CM", _tableContainer);
                 label.panel.BackgroundColor = GetBackgroundColor(drmProgression?.FullCM, "CM");
                 if (drmProgression?.FullCM == null || (drmProgression?.FullCM != null && !drmProgression.FullCM.Done))
                 {
@@ -210,7 +210,7 @@ namespace DrmTracker.UI.Views
 
                 foreach (var faction in _factions)
                 {
-                    label = UiUtils.CreateLabel(() => "", () => "", _tableContainer);
+                    label = UiUtils.CreateLabel(() => "", () => $"{_mapsResx.GetString($"{map.Key}Tooltip")} - {_factionsResx.GetString($"{faction.Key}Tooltip")}", _tableContainer);
                     label.panel.BackgroundColor = GetBackgroundColorFaction(drmProgression?.Factions, map.Id, faction.Id);
                     _tablePanels.Add(label);
                 }
